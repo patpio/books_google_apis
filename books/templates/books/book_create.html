@@ -6,6 +6,14 @@
 {% block content %}
     <h2>Add new book</h2>
 
+    {% if messages %}
+        {% for message in messages %}
+            {% if 'danger' in message.tags %}
+                <p class="text-danger">{{ message }}</p>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
     <form action="" method="POST">
         {% csrf_token %}
         {{ form|crispy }}

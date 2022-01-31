@@ -5,9 +5,9 @@
 {% block content %}
     <h2>Your books</h2>
 
-    <ul class="list-group list-group-flush">
-        {% for book in books %}
-            <div class="card" style="width: 18rem;">
+    {% for book in books %}
+        <div class="col-sm">
+            <div class="card" style="max-width: 18rem;">
               <img src="{{ book.cover_url }}" class="card-img-top" alt="cover">
               <div class="card-body">
                 <h5 class="card-title">{{ book.title }}</h5>
@@ -21,9 +21,9 @@
 
               </div>
             </div>
-        {% empty %}
-            <p>You have no added books yet.</p>
-        {% endfor %}
-    </ul>
+        </div>
+    {% empty %}
+        <p>You have no added books yet.</p>
+    {% endfor %}
 
 {% endblock %}
