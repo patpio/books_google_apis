@@ -23,17 +23,17 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         {% if not user.is_authenticated %}
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'account_signup' %}">Create free acount</a>
+          <a class="nav-link active" aria-current="page" href="{% url 'account_signup' %}">Create free account</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'account_login' %}">Login</a>
         </li>
         {% else %}
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'links:create_link' %}">Add link</a>
+          <a class="nav-link active" aria-current="page" href="#">#</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="{% url 'links:link_list' %}">Your links</a>
+          <a class="nav-link" aria-current="page" href="#">#</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
