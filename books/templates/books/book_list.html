@@ -7,15 +7,20 @@
 
     <ul class="list-group list-group-flush">
         {% for book in books %}
-            <a href="#" class="list-group-item list-group-item-action">
-                <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">List group item heading</h5>
-                <small class="text-muted">3 days ago</small>
-                </div>
-                <p class="mb-1">Some placeholder content in a paragraph.</p>
-                <p class="mb-1">Some placeholder content in a paragraph.</p>
-                <small class="text-muted">And some muted small print.</small>
-            </a>
+            <div class="card" style="width: 18rem;">
+              <img src="{{ book.cover_url }}" class="card-img-top" alt="cover">
+              <div class="card-body">
+                <h5 class="card-title">{{ book.title }}</h5>
+                  <ul>
+                      <li>Author: {{ book.author }}</li>
+                      <li>Published_date: {{ book.published_date }}</li>
+                      <li>ISBN: {{ book.isbn }}</li>
+                      <li>Page_count: {{ book.page_count }}</li>
+                      <li>Language: {{ book.language }}</li>
+                  </ul>
+
+              </div>
+            </div>
         {% empty %}
             <p>You have no added books yet.</p>
         {% endfor %}
