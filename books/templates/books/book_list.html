@@ -23,7 +23,19 @@
             </div>
         </div>
     {% empty %}
+        {% if no_result %}
+        <p>No search results.</p>
+        {% else %}
         <p>You have no added books yet.</p>
+        {% endif %}
     {% endfor %}
+
+{% endblock %}
+
+{% block search %}
+<form class="d-flex">
+    <input class="form-control me-2" type="search" placeholder="Search by author" aria-label="Search" name="search">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
 
 {% endblock %}

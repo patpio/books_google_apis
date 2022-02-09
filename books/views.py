@@ -16,6 +16,22 @@ class BookListView(LoginRequiredMixin, generic.ListView):
     template_name = 'books/book_list.html'
     context_object_name = 'books'
 
+    def get_queryset(self):
+        query = self.request.GET.get('search')
+        if query:
+            queryset = Book.objects.filter(author__contains=query)
+        else:
+            queryset = super().get_queryset()
+
+        return queryset
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if not self.queryset:
+            context['no_result'] = 'ala'
+
+        return context
+
 
 class BookCreateView(LoginRequiredMixin, generic.FormView):
     template_name = 'books/book_create.html'
