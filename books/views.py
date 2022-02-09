@@ -17,18 +17,18 @@ class BookListView(LoginRequiredMixin, generic.ListView):
     context_object_name = 'books'
 
     def get_queryset(self):
+        queryset = Book.objects.filter(added_by=self.request.user)
         query = self.request.GET.get('search')
+
         if query:
-            queryset = Book.objects.filter(author__contains=query)
-        else:
-            queryset = super().get_queryset()
+            queryset = queryset.filter(author__contains=query)
 
         return queryset
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        if not self.queryset:
-            context['no_result'] = 'ala'
+        if self.request.GET.get('search') and not self.queryset:
+            context['no_result'] = True
 
         return context
 
@@ -83,6 +83,7 @@ class BookCreateView(LoginRequiredMixin, generic.FormView):
         page_count = item.get('pageCount', 0)
         cover_url = item.get('imageLinks', {}).get('thumbnail', '/static/images/placeholder.jpg')
         language = item.get('language')
+        added_by = self.request.user
 
         for i in item.get('industryIdentifiers'):
             if i['type'] == 'ISBN_13':
@@ -94,6 +95,6 @@ class BookCreateView(LoginRequiredMixin, generic.FormView):
                 isbn = ''
 
         Book.objects.create(title=title, author=author, published_date=published_date, isbn=isbn, page_count=page_count,
-                            cover_url=cover_url, language=language)
+                            cover_url=cover_url, language=language, added_by=added_by)
 
         return super().form_valid(form)
